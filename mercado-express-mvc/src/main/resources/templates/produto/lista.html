@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="pt-BR">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Produtos - Mercado Express</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<nav class="navbar">
+    <a th:href="@{/produtos}" class="logo">🛒 Mercado Express</a>
+    <div class="nav-links">
+        <span sec:authentication="name"></span>
+        <a th:href="@{/produtos/novo}" sec:authorize="hasRole('ADMIN')">+ Novo Produto</a>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Sair</button>
+        </form>
+    </div>
+</nav>
+
+<div class="container">
+    <h2>Lista de Produtos</h2>
+
+    <div th:if="${mensagem}" class="alerta" th:text="${mensagem}"></div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Tipo</th>
+                <th>Setor</th>
+                <th>Tamanho</th>
+                <th>Preço</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${#lists.isEmpty(produtos)}">
+                <td colspan="7" style="text-align:center; padding:20px; color:#888;">
+                    Nenhum produto cadastrado.
+                </td>
+            </tr>
+            <tr th:each="p : ${produtos}">
+                <td th:text="${p.id}"></td>
+                <td th:text="${p.nome}"></td>
+                <td th:text="${p.tipo}"></td>
+                <td th:text="${p.setor}"></td>
+                <td th:text="${p.tamanho}"></td>
+                <td th:text="'R$ ' + ${#numbers.formatDecimal(p.preco, 1, 'POINT', 2, 'COMMA')}"></td>
+                <td>
+                    <a th:href="@{/produtos/{id}(id=${p.id})}" class="btn btn-azul">Ver</a>
+                    <a th:href="@{/produtos/editar/{id}(id=${p.id})}"
+                       sec:authorize="hasRole('ADMIN')" class="btn btn-verde">Editar</a>
+                    <a th:href="@{/produtos/deletar/{id}(id=${p.id})}"
+                       sec:authorize="hasRole('ADMIN')"
+                       class="btn btn-vermelho"
+                       onclick="return confirm('Confirma a exclusão?')">Excluir</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer>
+    Mercado Express &mdash; FIAP TDS &mdash; CP4 Parte II
+</footer>
+
+</body>
+</html>
