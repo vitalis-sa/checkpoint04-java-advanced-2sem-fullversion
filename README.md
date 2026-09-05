@@ -180,14 +180,6 @@ Ao tentar acessar uma rota privada sem permissão, o Spring Security bloqueia e 
 
 ---
 
-## Deploy
-
-A aplicação está disponível em produção no **Render**:
-
-**URL:** *[LINK](https://mercado-express-mvc-npa1.onrender.com/login)*
-
----
-
 ## Estrutura do Projeto
 
 ```
