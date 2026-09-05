@@ -170,13 +170,11 @@ Logado como **ADMIN** — todos os botões disponíveis.
 
 ![Listagem após exclusão](./prints/lista-apos-delete.png)
 
----
+## Deploy
 
-### Rota bloqueada pelo Security
+A aplicação está disponível em produção no **Render**:
 
-Ao tentar acessar uma rota privada sem permissão, o Spring Security bloqueia e redireciona para o login.
-
-![Rota bloqueada](./prints/rota-bloqueada.png)
+**URL:** *[LINK](https://mercado-express-mvc-npa1.onrender.com/login)*
 
 ---
 
