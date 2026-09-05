@@ -34,7 +34,7 @@ Aplicação web desenvolvida com Spring MVC e Thymeleaf para gerenciamento de pr
 
 ## Configuração do Spring Initializr
 
-![Spring Initializr](./prints/spring%20initializr.png)
+![Spring Initializr](./prints/spring initializr.png)
 
 ---
 
@@ -106,57 +106,77 @@ A aplicação define dois perfis de usuário com permissões diferentes:
 
 Base URL: `http://localhost:8083`
 
-### Listagem de produtos
+---
 
-`GET /produtos` — lista todos os produtos cadastrados no banco.
+### Tela de Login
 
-*(adicionar print da tela de listagem)*
+Rota pública — acessível sem autenticação.
+
+`GET /login`
+
+![Login](./prints/login.png)
 
 ---
 
-### Cadastrar produto
+### Listagem de Produtos
+
+`GET /produtos` — lista todos os produtos cadastrados no banco.
+
+Logado como **USER** — botões de editar e excluir não são exibidos. O controle é feito via `sec:authorize="hasRole('ADMIN')"` nos templates Thymeleaf.
+
+![Listagem USER](./prints/lista-user.png)
+
+Logado como **ADMIN** — todos os botões disponíveis.
+
+![Listagem ADMIN](./prints/lista-admin.png)
+
+---
+
+### Cadastrar Produto
 
 `GET /produtos/novo` — exibe o formulário de cadastro.
 
 `POST /produtos/salvar` — salva o novo produto no banco.
 
-*(adicionar print do formulário preenchido e da listagem após salvar)*
+![Formulário de cadastro](./prints/form-cadastro.png)
+
+![Listagem após cadastro](./prints/lista-apos-cadastro.png)
 
 ---
 
-### Editar produto
+### Ver Detalhes
 
-`GET /produtos/editar/{id}` — exibe o formulário preenchido com os dados atuais.
+`GET /produtos/{id}` — exibe os dados completos de um produto consultado pelo ID.
+
+![Detalhe do produto](./prints/detalhe.png)
+
+---
+
+### Editar Produto
+
+`GET /produtos/editar/{id}` — exibe o formulário preenchido com os dados atuais do produto.
 
 `POST /produtos/editar/{id}` — atualiza o produto no banco.
 
-*(adicionar print do formulário de edição e da listagem após salvar)*
+![Formulário de edição](./prints/form-edicao.png)
+
+![Listagem após edição](./prints/lista-apos-edicao.png)
 
 ---
 
-### Ver detalhes
-
-`GET /produtos/{id}` — exibe os dados completos de um produto.
-
-*(adicionar print da tela de detalhe)*
-
----
-
-### Excluir produto
+### Excluir Produto
 
 `GET /produtos/deletar/{id}` — exclui o produto e redireciona para a listagem.
 
-*(adicionar print da confirmação e da listagem após exclusão)*
+![Listagem após exclusão](./prints/lista-apos-delete.png)
 
 ---
 
-## Tela de Login
+### Rota bloqueada pelo Security
 
-*(adicionar print da tela de login)*
+Ao tentar acessar uma rota privada sem permissão, o Spring Security bloqueia e redireciona para o login.
 
-Após o login com perfil USER, os botões de editar e excluir não são exibidos na interface — o controle é feito via `sec:authorize="hasRole('ADMIN')"` nos templates Thymeleaf.
-
-*(adicionar print mostrando a listagem logado como user — sem os botões de editar/excluir)*
+![Rota bloqueada](./prints/rota-bloqueada.png)
 
 ---
 
@@ -164,7 +184,7 @@ Após o login com perfil USER, os botões de editar e excluir não são exibidos
 
 A aplicação está disponível em produção no **Render**:
 
-**URL:** *(adicionar após o deploy)*
+**URL:** *[LINK](https://mercado-express-mvc-npa1.onrender.com/login)*
 
 ---
 
